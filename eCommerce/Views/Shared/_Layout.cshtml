@@ -59,6 +59,9 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/commonfunction.js?1=20"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="~/Content/AdminTheme/assets/images/favicon.png">
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor HttpContextAccessor
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -84,9 +87,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (HttpContextAccessor.HttpContext.Session.GetInt32("id") != null)
+                    {
+                        <li><a>Welcome : @HttpContextAccessor.HttpContext.Session.GetString("firstname")</a> </li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="ShowData">ShowData</a></li>
+                        <li><a href="Logout">Logout</a></li>
+
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Registration</a></li>
+                    }
                 </ul>
             </div>
         </div>

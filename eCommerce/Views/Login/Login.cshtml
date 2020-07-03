@@ -1,4 +1,4 @@
-﻿@model eCommerce.Models.Login
+﻿ @model eCommerce.Models.Login
 
 @{
     ViewData["Title"] = "Login";
@@ -37,8 +37,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <meta name="description" content="Courier365Cloud, Citta Solutions">
-        <meta name="author" content="Citta Solutions">
+       
         <link rel="icon" href="~/Content/AdminTheme/assets/images/favicon.png" type="image/png">
 
 
@@ -80,14 +79,14 @@
                                     <div class="form-group input-group-append col-md 6">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         <label for="nam" class="control-label sr-only">Username</label>
-                                        @Html.TextBoxFor(o => o.Username, new { @maxlength = "100", @id = "nam", @class = "form-control", @placeholder = "Username" })
-                                        @Html.ValidationMessageFor(o => o.Username, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(o => o.email, new { @maxlength = "100", @id = "nam", @class = "form-control", @placeholder = "Username" })
+                                        @Html.ValidationMessageFor(o => o.email, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group input-group-append">
                                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                         <label for="pwd" class="control-label sr-only">Password</label>
-                                        @Html.PasswordFor(o => o.Password, new { @maxlength = "100", @id = "pwd", @name = "password", @class = "form-control", @placeholder = "Password" })
-                                        @Html.ValidationMessageFor(o => o.Password, "", new { @class = "text-danger" })
+                                        @Html.PasswordFor(o => o.password, new { @maxlength = "100", @id = "pwd", @name = "password", @class = "form-control", @placeholder = "Password" })
+                                        @Html.ValidationMessageFor(o => o.password, "", new { @class = "text-danger" })
                                         <span toggle="#pwd" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     </div>
 

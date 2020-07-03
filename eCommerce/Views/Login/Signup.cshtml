@@ -1,0 +1,201 @@
+﻿@model eCommerce.Models.Signup
+@{
+    ViewData["Title"] = "Signup";
+}
+<head>
+    <style>
+        label.error {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            padding: 1px 20px 1px 20px;
+        }
+
+        .errors {
+            color: blue;
+            background-color: #acf;
+        }
+    </style>
+
+</head>
+
+
+<div class="container">
+    <div class="row">
+        <br />
+        <form class="form-horizontal" id="forms" method="post" action="">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Register Here</legend>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="firstname">First Name</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Firstname" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="lastname">Last Name</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Lastname" } })
+                        <span class="help-block"> </span>
+                    </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="email">Email</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter email" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="phonenumber">Phone Number</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.MobNumber, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Phone Number" } })
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="password">Password</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password", @name = "password", @id = "password", @class = "errors form-control", @placeholder = "Enter password" } })
+                    </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="password_confirmation">Confirm Password</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @type = "password", @name = "ConfirmPassword", @id = "ConfirmPassword", @class = "errors form-control", @placeholder = "Enter Write Password" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="AccountType">Account Type</label>
+                    <div class="col-md-4">
+                        Seller
+                        @Html.RadioButtonFor(model => model.AccountType, new { htmlAttributes = new { @name = "Seller", @id = "Seller", @class = "errors form-control", @placeholder = "Enter Write Password" } })
+                        Customer
+                        @Html.RadioButtonFor(model => model.AccountType, new { htmlAttributes = new { @name = "Customer", @id = "Seller", @class = "errors form-control", @placeholder = "Enter Write Password" } })
+                    </div>
+                </div>
+
+
+                <div class="form-group ">
+                    <center>
+                        <input type="submit" value="Register" id="btn-submit" class="btn btn-Success ">
+
+                        <input type="reset" value="Cancel" id="btn-submit" class="btn btn-danger ">
+                    </center>
+
+                </div>
+                <label>Already have an Account</label>
+                <center>
+                    <input type="submit" value="Login" id="login" class="btn btn-Success ">
+                    </center>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+<SCRIPT language="javascript">
+      $(document).ready(function () {
+        $(document).on("click", ".classAdd", function () { //
+            var rowCount = $('.data-contact-person').length + 1;
+            var contactdiv = '<tr class="data-contact-person">' +
+                '<td><input type="text" name="name' + rowCount + '" class="form-control name" /></td>' +
+                '<td><input type="text" name="value' + rowCount + '" class="form-control value" /></td>' +
+                '<td><button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">Add More</button>' +
+                '<button type="button" id="btnDelete" class="deleteContact btn btn btn-danger btn-xs">Remove</button></td>' +
+                '</tr>';
+            $('#maintable').append(contactdiv); // Adding these controls to Main table class
+        });
+    });
+
+        $(document).on("click", ".deleteContact", function () {
+            $(this).closest("tr").remove(); // closest used to remove the respective 'tr' in which I have my controls
+        });
+
+</SCRIPT>
+<script>
+    $(document).ready(function () {
+        //$("#Add").on("click", function () {
+        //    $("#textboxDiv").append("<div><br><input type='text' /><br></div>");
+        //});
+        //$("#Remove").on("click", function () {
+        //    $("#textboxDiv").children().last().remove();
+        //});
+        $.validator.addMethod("email",
+            function (value, element) {
+                return /^\w+([-+.']\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+            },
+            "Pleas Enter Valid Email"
+        );
+        $("#phonenumber").bind("keypress", function (e) {
+            var keyCode = e.which ? e.which : e.keyCode
+
+            if (!(keyCode >= 48 && keyCode <= 57)) {
+
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        $('#forms').validate({
+
+            rules: {
+                firstname: { required: true },
+                lastname: { required: true },
+                email: {
+                    required: true,
+                    remote: {
+                        url: '/Home/EmailExist',
+                        type: 'POST'
+                    }
+
+
+                },
+                phonenumber: {
+                    required: true,
+                    maxlength: 15,
+                    minlength: 10
+
+
+                },
+                dob: {
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 8,
+                },
+                password_confirmation: {
+                    equalTo: "#password"
+                }
+            },
+            message: {
+                'firstname': 'Enter Your Firstname',
+                'lastname': 'Enter Your lastname',
+                'email': {
+                    required: 'Enter valid email address',
+                    remote: 'This is already exist'
+                },
+                'dob': 'Please enter your Birth date',
+                'phonenumber': 'Please Enter Valid phone number ',
+                'password': 'enter valid Password',
+                'password_confirmation': 'Password does not match'
+
+            }
+        });
+
+    });
+
+</script>
