@@ -14,7 +14,7 @@ namespace eCommerce.Controllers
         {
             return View();
         }
-        public IActionResult Index1()
+        public IActionResult anujdarji()
         {
             return View();
         }
