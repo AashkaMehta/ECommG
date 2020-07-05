@@ -21,12 +21,7 @@ namespace eCommerce.Controllers
 
             return View();
         }
-        public IActionResult About1()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
+       
 
         public IActionResult Contact()
         {
