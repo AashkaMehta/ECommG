@@ -75,7 +75,7 @@
 
                             <div class="body col-md-6 ">
                                 <form class="form-auth-small">
-                                   
+
                                     <div class="form-group input-group-append col-md 6">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         <label for="nam" class="control-label sr-only">Username</label>
@@ -90,17 +90,18 @@
                                         <span toggle="#pwd" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     </div>
 
-                                    <input value="Sign In" type="submit" class="btn btn-primary btn-lg btn-block" />
+                                    @*<input value="Sign In" type="submit" class="btn btn-primary btn-lg btn-block" />*@
+                                    <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("SellerDashboard", "Seller")'"><i class="fa fa-save"></i> Save</button>
                                     <br />
                                     <h6><a href="http://localhost:2005/Home/ForgotPassword">Forgot Password</a></h6>
                                     @*<div class="bottom pt-10">
-                                            <span class="helper-text m-b-10">
-                                                <i class="fa fa-lock"></i>
-                                                <a href="@Url.Action("ForgotPassword", "Home")" class="text-muted" id="forget-password">Forgot password?</a>
-                                            </span>
+            <span class="helper-text m-b-10">
+                <i class="fa fa-lock"></i>
+                <a href="@Url.Action("ForgotPassword", "Home")" class="text-muted" id="forget-password">Forgot password?</a>
+            </span>
 
-                                        </div>*@
-                                    
+        </div>*@
+
                                 </form>
                             </div>
                         </div>

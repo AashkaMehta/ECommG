@@ -26,19 +26,23 @@
         <form class="form-horizontal" id="forms" method="post" action="">
             <fieldset>
                 <!-- Form Name -->
-                <legend>Register Here</legend>
+                <legend>SignUp</legend>
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="firstname">First Name</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Firstname" } })
+                        @*@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Firstname" } })*@
+                        @Html.TextBoxFor(model => model.FirstName, new { @maxlength = "100", @class = "errors form-control", @id = "FirstName",@style = "background-color: #eee", @*@onkeypress = "return IsAlphaNumeric(event);",*@ @placeholder = "Enter FirstName"@*, required="required"*@})
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="lastname">Last Name</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Lastname" } })
+                        @*@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Lastname" } })*@
+                        @Html.TextBoxFor(model => model.LastName, new { @maxlength = "100", @class = "errors form-control", @id = "LastName",@style = "background-color: #eee", @*@onkeypress = "return IsAlphaNumeric(event);",*@ @placeholder = "Enter LastName" @*, required="required"*@})
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         <span class="help-block"> </span>
                     </div>
                 </div>
@@ -46,14 +50,18 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="email">Email</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter email" } })
+                        @*@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter email" , required="required"} })*@
+                        @Html.TextBoxFor(model => model.Email, new {  @id = "Email", @class = "errors form-control", @style = "background-color: #eee"@*, @readonly = "readonly"*@, @placeholder = "Enter Email"@*, required="required"*@})
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="phonenumber">Phone Number</label>
+                    <label class="col-md-4 control-label" for="phonenumber">Mobile Number</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.MobNumber, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Phone Number" } })
+                        @*@Html.EditorFor(model => model.MobNumber, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Phone Number" } })*@
+                        @Html.TextBoxFor(model => model.MobNumber, new { @maxlength = "10", @minlength = "10", @id = "MobileNo", @class = "errors form-control", @style = "background-color: #eee"@*, @readonly = "readonly"*@, @placeholder = "Enter Mobile Number"@*, required="required"*@})
+                        @Html.ValidationMessageFor(model => model.MobNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -61,18 +69,28 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="password">Password</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password", @name = "password", @id = "password", @class = "errors form-control", @placeholder = "Enter password" } })
+                       
+                         @Html.TextBoxFor(model => model.Password, new { @type = "password", @id = "password", @class = "errors form-control", @style = "background-color: #eee", @onkeypress = "return IsNumeric(event);" , @placeholder = "Enter Password"})
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="password_confirmation">Confirm Password</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @type = "password", @name = "ConfirmPassword", @id = "ConfirmPassword", @class = "errors form-control", @placeholder = "Enter Write Password" } })
+                        @*@Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @type = "password", @name = "ConfirmPassword", @id = "ConfirmPassword", @class = "errors form-control", @placeholder = "Enter Write Password" } })*@
+                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @type = "password", @*@maxlength = "10", @minlength = "10",*@ @id = "ConfirmPassword", @class = "errors form-control", @style = "background-color: #eee"@*, @readonly = "readonly"*@, @*@onkeypress = "return IsNumeric(event);",*@ @placeholder = "Enter Confirm Password" @*, required="required"*@})
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
+                    <label class="col-md-4 control-label">
+                       Account Type
+                    </label>
+                   
+                </div>
+                @*<div class="form-group">
                     <label class="col-md-4 control-label" for="AccountType">Account Type</label>
                     <div class="col-md-4">
                         Seller
@@ -80,32 +98,45 @@
                         Customer
                         @Html.RadioButtonFor(model => model.AccountType, new { htmlAttributes = new { @name = "Customer", @id = "Seller", @class = "errors form-control", @placeholder = "Enter Write Password" } })
                     </div>
-                </div>
+                </div>*@
 
 
                 <div class="form-group ">
                     <center>
-                        <input type="submit" value="Register" id="btn-submit" class="btn btn-Success ">
+                        @*<input type="submit" value="Register" id="btn-submit" class="btn btn-Success ">
 
-                        <input type="reset" value="Cancel" id="btn-submit" class="btn btn-danger ">
+        <input type="reset" value="Cancel" id="btn-submit" class="btn btn-danger ">*@
+
+                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("Login", "Login")'"><i class="fa fa-save"></i> Save</button>
                     </center>
 
                 </div>
                 <label>Already have an Account</label>
                 <center>
                     <input type="submit" value="Login" id="login" class="btn btn-Success ">
-                    </center>
+                </center>
             </fieldset>
         </form>
 
     </div>
 </div>
 
+@*<script>
+    jQuery('.validatedForm').validate({
+            rules : {
+                password : {
+                    minlength : 5
+                },
+                password_confirm : {
+                    minlength : 5,
+                    equalTo : "#password"
+                }
+            }
+</script>*@
 
 
 
-
-<SCRIPT language="javascript">
+@*<SCRIPT language="javascript">
       $(document).ready(function () {
         $(document).on("click", ".classAdd", function () { //
             var rowCount = $('.data-contact-person').length + 1;
@@ -123,79 +154,5 @@
             $(this).closest("tr").remove(); // closest used to remove the respective 'tr' in which I have my controls
         });
 
-</SCRIPT>
-<script>
-    $(document).ready(function () {
-        //$("#Add").on("click", function () {
-        //    $("#textboxDiv").append("<div><br><input type='text' /><br></div>");
-        //});
-        //$("#Remove").on("click", function () {
-        //    $("#textboxDiv").children().last().remove();
-        //});
-        $.validator.addMethod("email",
-            function (value, element) {
-                return /^\w+([-+.']\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
-            },
-            "Pleas Enter Valid Email"
-        );
-        $("#phonenumber").bind("keypress", function (e) {
-            var keyCode = e.which ? e.which : e.keyCode
+</SCRIPT>*@
 
-            if (!(keyCode >= 48 && keyCode <= 57)) {
-
-                return false;
-            } else {
-                return true;
-            }
-        });
-
-        $('#forms').validate({
-
-            rules: {
-                firstname: { required: true },
-                lastname: { required: true },
-                email: {
-                    required: true,
-                    remote: {
-                        url: '/Home/EmailExist',
-                        type: 'POST'
-                    }
-
-
-                },
-                phonenumber: {
-                    required: true,
-                    maxlength: 15,
-                    minlength: 10
-
-
-                },
-                dob: {
-                    required: true
-                },
-                password: {
-                    required: true,
-                    minlength: 8,
-                },
-                password_confirmation: {
-                    equalTo: "#password"
-                }
-            },
-            message: {
-                'firstname': 'Enter Your Firstname',
-                'lastname': 'Enter Your lastname',
-                'email': {
-                    required: 'Enter valid email address',
-                    remote: 'This is already exist'
-                },
-                'dob': 'Please enter your Birth date',
-                'phonenumber': 'Please Enter Valid phone number ',
-                'password': 'enter valid Password',
-                'password_confirmation': 'Password does not match'
-
-            }
-        });
-
-    });
-
-</script>

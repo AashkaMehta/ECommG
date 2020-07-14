@@ -14,7 +14,7 @@ namespace eCommerce.Controllers
     public class LoginController : Controller
     {
 
-        string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\LENOVO\Documents\Ecomm.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\hp\source\repos\ECommG\eCommerce\Ecomm.mdf;Integrated Security=True;Connect Timeout=30";
         string username = string.Empty;
         string password = string.Empty;
 
@@ -27,38 +27,51 @@ namespace eCommerce.Controllers
         [HttpGet]
         public IActionResult Signup()
         {
+
             ViewBag.Message = HttpContext.Session.GetString("Email");
             return View();
-        }
+        } 
         [HttpPost]
         public IActionResult Signup([Bind] Signup s)
         {
-           add_emp(s);
+            //return View();
+            if (add_emp(s) == null)
+            {
+                return RedirectToAction("Login");
+                //return View();
+
+            }
             return View();
+            //return RedirectToAction("Login");
+
         }
-       
+
 
         public string add_emp(Signup s2)
         {
             using (SqlConnection con = new SqlConnection(connectionstring))
             {
-                SqlCommand cmd = new SqlCommand("GetData_Signup", con);
-                con.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@firstname", s2.FirstName);
-                cmd.Parameters.AddWithValue("@lastname", s2.LastName);
-                cmd.Parameters.AddWithValue("@email", s2.Email);
-                cmd.Parameters.AddWithValue("@password", s2.Password);
-                cmd.Parameters.AddWithValue("@Mobnumber", s2.MobNumber);
-                //cmd.Parameters.AddWithValue("@name", m2.name);
-                //cmd.Parameters.AddWithValue("@value", m2.value);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
+                if (ModelState.IsValid)
+                {
+                    SqlCommand cmd = new SqlCommand("GetData_Signup", con);
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@firstName", s2.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName", s2.LastName);
+                    cmd.Parameters.AddWithValue("@email", s2.Email);
+                    cmd.Parameters.AddWithValue("@password", s2.Password);
+                    cmd.Parameters.AddWithValue("@Mobnumber", s2.MobNumber);
+                    //cmd.Parameters.AddWithValue("@accountType", s2.AccountType);
+                    //cmd.Parameters.AddWithValue("@name", m2.name);
+                    //cmd.Parameters.AddWithValue("@value", m2.value);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
             }
             return ("Success");
 
         }
+
 
         [HttpGet]
         public ActionResult Login(Login login)
@@ -92,10 +105,12 @@ namespace eCommerce.Controllers
                     while (rdr.Read())
                     {
                         HttpContext.Session.SetString("id", rdr["id"].ToString());
-                        HttpContext.Session.SetString("firstname", rdr["firstname"].ToString());
+                        HttpContext.Session.SetString("Firstname", rdr["Firstname"].ToString());
 
                     }
-                    result = "success";
+                    //result = "../Seller/SellerDashboard";
+                    //return View();
+                    return RedirectToAction("../Seller/SellerDashboard");
                 }
                 else
                 {
@@ -110,6 +125,12 @@ namespace eCommerce.Controllers
 
             
         }
-    
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("../Login/Login");
+        }
+
     }
 }

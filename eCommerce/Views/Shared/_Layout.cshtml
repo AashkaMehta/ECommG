@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - eCommerce</title>
+    <title>@ViewData["Title"] - E-Commerce</title>
     <link href="~/Content/AdminTheme/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/AdminTheme/assets/vendor/font-awesome/css/font-awesome.min.css">
 
@@ -87,10 +87,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (HttpContextAccessor.HttpContext.Session.GetInt32("id") != null)
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("id") != null)
                     {
-                        <li><a>Welcome : @HttpContextAccessor.HttpContext.Session.GetString("firstname")</a> </li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="ShowData">ShowData</a></li>
+                        <li><a>Welcome : @HttpContextAccessor.HttpContext.Session.GetString("Firstname")</a> </li>
                         <li><a href="Logout">Logout</a></li>
 
                     }
