@@ -32,6 +32,11 @@ namespace eCommerce.Controllers
             return View(result);
         }
 
+        public ActionResult SellerDetail()
+        {
+            return View();
+        }
+
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();

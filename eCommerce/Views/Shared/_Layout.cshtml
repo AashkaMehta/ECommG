@@ -91,12 +91,15 @@
                     {
                         <li><a>Welcome : @HttpContextAccessor.HttpContext.Session.GetString("Firstname")</a> </li>
                         <li><a href="Logout">Logout</a></li>
+                        <li><a asp-area="" asp-controller="Seller" asp-action="SellerDashboard">SellerDashboard</a></li>
+                        <li><a asp-area="" asp-controller="Seller" asp-action="SellerDetail">SellerDetails</a></li>
+
 
                     }
                     else
                     {
-                        <li><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Registration</a></li>
+                        <li><a asp-area="" asp-controller="Login" asp-action="Login">Login</a></li>
+                        <li><a asp-area="" asp-controller="Login" asp-action="Signup">Registration</a></li>
                     }
                 </ul>
             </div>

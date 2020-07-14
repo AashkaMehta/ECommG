@@ -1,0 +1,188 @@
+﻿@model eCommerce.Models.SellerDetail
+
+@{
+    ViewData["Title"] = "SellerDetail";
+}
+
+@*<h2>SellerDetail</h2>*@
+
+<hr />
+@using (Html.BeginForm("SellerDetail", "Seller", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*@Html.HiddenFor(o => o.Id)*@
+
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h2>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth">
+                        <i class="fa fa-arrow-left"></i>
+                    </a> Seller Details
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                @if (@TempData["msg"] != null)
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-success" id="lblmsg">
+                            <p>
+                                @TempData["msg"]
+                            </p>
+                        </div>
+                    </div>
+                }
+
+            <div class="body">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Name
+                        </label>
+                        @Html.TextBoxFor(o => o.SellerName, new { @maxlength = "100", @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.SellerName, "", new { @class = "font-red" })
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Address
+                        </label>
+                        <div class="form-group">
+                            @Html.TextAreaFor(o => o.Address, new { @maxlength = "100", @class = "form-control" })
+                            @*@Html.ValidationMessageFor(o => o.CityCode, "", new { @class = "font-red" })*@
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Pincode
+                        </label>
+                        <div class="form-group">
+                            @Html.TextBoxFor(o => o.Pincode, new { @maxlength = "6", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.Pincode, "", new { @class = "font-red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            City
+                        </label>
+                       
+                        @{
+                            var listCity = new List<SelectListItem>();
+                            listCity.Add(new SelectListItem
+                            {
+                                Text = "Rajkot",
+                                Value = "1"
+                            });
+
+                            listCity.Add(new SelectListItem
+                            {
+                                Text = "Ahmedabad",
+                                Value = "2"
+                            });
+                            listCity.Add(new SelectListItem
+                            {
+                                Text = "Baroda",
+                                Value = "3"
+                            });
+
+                        }
+                    <div class="form-group">
+                        @*@Html.DropDownListFor(o => o.City, new SelectList(ViewBag.citylist, "Value", "Text"), "--Select State--", new { @class = "form-control", @id = "stateid" })*@
+                        @Html.DropDownListFor(o => o.City, new SelectList(listCity, "Value", "Text"), "Select City", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(o => o.City, "", new { @class = "font-red" })
+                        @*@Html.HiddenFor(o => o.Statename)*@
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            State
+                        </label>
+
+                        @{
+                            var listState = new List<SelectListItem>();
+                            listState.Add(new SelectListItem
+                            {
+                                Text = "Gujarat",
+                                Value = "1"
+                            });
+
+                            listState.Add(new SelectListItem
+                            {
+                                Text = "Maharastra",
+                                Value = "2"
+                            });
+                            listState.Add(new SelectListItem
+                            {
+                                Text = "Rajasthan",
+                                Value = "3"
+                            });
+
+                        }
+
+                    <div class="form-group">
+                        @Html.DropDownListFor(o => o.State, new SelectList(listState, "Value", "Text"), "Select State ", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(o => o.State, "", new { @class = "font-red" })
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Country
+                        </label>
+
+                        @{
+                            var listCountry = new List<SelectListItem>();
+                            listCountry.Add(new SelectListItem
+                            {
+                                Text = "India",
+                                Value = "1"
+                            });
+
+                            
+                        }
+
+                    <div class="form-group">
+                        @Html.DropDownListFor(o => o.Country, new SelectList(listCountry, "Value", "Text"), "Select Country ", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(o => o.Country, "", new { @class = "font-red" })
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        @*@if (ViewBag.addnew == true && ViewBag.PageMode != "view")*@
+
+                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("SellerDetail", "Seller")'"><i class="fa fa-save"></i> Save</button>
+
+                        <a class="btn btn-danger btn-lg ml-10" href="@Url.Action("Login", "Login")">Cancel</a>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
