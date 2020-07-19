@@ -53,14 +53,13 @@
                         @*@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter email" , required="required"} })*@
                         @Html.TextBoxFor(model => model.Email, new {  @id = "Email", @class = "errors form-control", @style = "background-color: #eee"@*, @readonly = "readonly"*@, @placeholder = "Enter Email"@*, required="required"*@})
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="phonenumber">Mobile Number</label>
                     <div class="col-md-4">
                         @*@Html.EditorFor(model => model.MobNumber, new { htmlAttributes = new { @class = "errors form-control", @placeholder = "Enter Phone Number" } })*@
-                        @Html.TextBoxFor(model => model.MobNumber, new { @maxlength = "10", @minlength = "10", @id = "MobileNo", @class = "errors form-control", @style = "background-color: #eee"@*, @readonly = "readonly"*@, @placeholder = "Enter Mobile Number"@*, required="required"*@})
+                        @Html.TextBoxFor(model => model.MobNumber, new { @maxlength = "10", @minlength = "10", @id = "MobileNumber", @class = "errors form-control", @style = "background-color: #eee"@*, @readonly = "readonly"*@, @placeholder = "Enter Mobile Number",  @onkeypress = "return IsNumeric(event);"})
                         @Html.ValidationMessageFor(model => model.MobNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -84,12 +83,12 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label class="col-md-4 control-label">
                        Account Type
                     </label>
                    
-                </div>
+                </div>*@
                 @*<div class="form-group">
                     <label class="col-md-4 control-label" for="AccountType">Account Type</label>
                     <div class="col-md-4">
@@ -106,8 +105,9 @@
                         @*<input type="submit" value="Register" id="btn-submit" class="btn btn-Success ">
 
         <input type="reset" value="Cancel" id="btn-submit" class="btn btn-danger ">*@
+                        @*<input type="submit" value="Register" id="btn-submit" class="btn btn-info ">*@
 
-                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("Login", "Login")'"><i class="fa fa-save"></i> Save</button>
+                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="IsEmail();"><i class="fa fa-save"></i> Save</button>
                     </center>
 
                 </div>
@@ -120,6 +120,7 @@
 
     </div>
 </div>
+
 
 @*<script>
     jQuery('.validatedForm').validate({

@@ -1,0 +1,167 @@
+﻿@model eCommerce.Models.Seller
+
+@{
+    ViewData["Title"] = "Seller";
+}
+
+@using (Html.BeginForm("Seller", "Seller", FormMethod.Post, new { enctype = "multipart/form-data", id = "myform" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*@Html.HiddenFor(o => o.Id)*@
+
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h2>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth">
+                        <i class="fa fa-arrow-left"></i>
+                    </a> Add Products
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                @if (@TempData["msg"] != null)
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-success" id="lblmsg">
+                            <p>
+                                @TempData["msg"]
+                            </p>
+                        </div>
+                    </div>
+                }
+
+            <div class="body">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Model No
+                        </label>
+                        @Html.TextBoxFor(o => o.ModelNo, new { @maxlength = "16", @class = "form-control" })
+                        @Html.ValidationMessageFor(o => o.ModelNo, "", new { @class = "font-red" })
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Product Name
+                        </label>
+                        <div class="form-group">
+                            @Html.TextBoxFor(o => o.ProductName, new { @maxlength = "100", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.ProductName, "", new { @class = "font-red" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Brand Name
+                        </label>
+                        <div class="form-group">
+                            @Html.TextBoxFor(o => o.BrandName, new { @maxlength = "100", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.BrandName, "", new { @class = "font-red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Category
+                        </label>
+
+                        @{
+                            var listCategory = new List<SelectListItem>();
+                            listCategory.Add(new SelectListItem
+                            {
+                                Text = "Electronics",
+                                Value = "1"
+                            });
+
+                            listCategory.Add(new SelectListItem
+                            {
+                                Text = "Men",
+                                Value = "2"
+                            });
+                            listCategory.Add(new SelectListItem
+                            {
+                                Text = "Women",
+                                Value = "3"
+                            });
+                            listCategory.Add(new SelectListItem
+                            {
+                                Text = "Kids",
+                                Value = "4"
+                            });
+
+                        }
+                        <div class="form-group">
+                            @*@Html.DropDownListFor(o => o.City, new SelectList(ViewBag.citylist, "Value", "Text"), "--Select State--", new { @class = "form-control", @id = "stateid" })*@
+                            @Html.DropDownListFor(o => o.Category, new SelectList(listCategory, "Value", "Text"), "Select Category", new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(o => o.Category, "", new { @class = "font-red" })
+                            @*@Html.HiddenFor(o => o.Statename)*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Price
+                        </label>
+                        <div class="form-group">
+                            @Html.TextBoxFor(o => o.Price, new { @maxlength = "10", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.Price, "", new { @class = "font-red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Quantity
+                        </label>
+                        <div class="form-group">
+                            @Html.TextBoxFor(o => o.Quantity, new { @maxlength = "10", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.Quantity, "", new { @class = "font-red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Product Description
+                        </label>
+                        <div class="form-group">
+                            @Html.TextAreaFor(o => o.ProductDescription, new { @maxlength = "200", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.ProductDescription, "", new { @class = "font-red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        @*@if (ViewBag.addnew == true && ViewBag.PageMode != "view")*@
+
+                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("SellerDashboard", "Seller")'"><i class="fa fa-save"></i> Save</button>
+
+                        <a class="btn btn-danger btn-lg ml-10" href="@Url.Action("SellerDashboard", "Seller")">Cancel</a>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+}

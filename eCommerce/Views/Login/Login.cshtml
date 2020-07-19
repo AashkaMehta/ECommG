@@ -79,14 +79,14 @@
                                     <div class="form-group input-group-append col-md 6">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         <label for="nam" class="control-label sr-only">Username</label>
-                                        @Html.TextBoxFor(o => o.email, new { @maxlength = "100", @id = "nam", @class = "form-control", @placeholder = "Username" })
-                                        @Html.ValidationMessageFor(o => o.email, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(o => o.Email, new { @maxlength = "100", @id = "nam", @class = "form-control", @placeholder = "Username" })
+                                        @Html.ValidationMessageFor(o => o.Email, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group input-group-append">
                                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                         <label for="pwd" class="control-label sr-only">Password</label>
-                                        @Html.PasswordFor(o => o.password, new { @maxlength = "100", @id = "pwd", @name = "password", @class = "form-control", @placeholder = "Password" })
-                                        @Html.ValidationMessageFor(o => o.password, "", new { @class = "text-danger" })
+                                        @Html.PasswordFor(o => o.Password, new { @maxlength = "100", @id = "pwd", @name = "password", @class = "form-control", @placeholder = "Password" })
+                                        @Html.ValidationMessageFor(o => o.Password, "", new { @class = "text-danger" })
                                         <span toggle="#pwd" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     </div>
 

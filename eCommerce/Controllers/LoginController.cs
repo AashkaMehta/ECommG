@@ -17,7 +17,7 @@ namespace eCommerce.Controllers
         string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\hp\source\repos\ECommG\eCommerce\Ecomm.mdf;Integrated Security=True;Connect Timeout=30";
         string username = string.Empty;
         string password = string.Empty;
-
+        Login L = new Login();
         Signup s2 = new Signup();
 
         public IActionResult Index()
@@ -37,12 +37,12 @@ namespace eCommerce.Controllers
             //return View();
             if (add_emp(s) == null)
             {
-                return RedirectToAction("Login");
-                //return View();
+                //return RedirectToAction("Login");
+                return View();
 
             }
-            return View();
-            //return RedirectToAction("Login");
+            //return View();
+            return RedirectToAction("Login");
 
         }
 
@@ -74,14 +74,14 @@ namespace eCommerce.Controllers
 
 
         [HttpGet]
-        public ActionResult Login(Login login)
+        public ActionResult Login()
         {
             return View();  
         }
         
 
         [HttpPost]
-        public ActionResult Login(string email, string password)
+        public ActionResult Login([Bind] Login L)
         {
             string result;
 
@@ -94,17 +94,20 @@ namespace eCommerce.Controllers
             SqlCommand cmd = new SqlCommand("validate", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@Email", L.Email);
+            cmd.Parameters.AddWithValue("@Password", L.Password);
             
             using (SqlDataReader rdr = cmd.ExecuteReader())
             {
-
                 if (rdr.HasRows)
                 {
                     while (rdr.Read())
                     {
+                      
                         HttpContext.Session.SetString("id", rdr["id"].ToString());
+                        
+                        //var Id=HttpContext.Session.GetString( "id");
+                        //L.id = Id;
                         HttpContext.Session.SetString("Firstname", rdr["Firstname"].ToString());
 
                     }
@@ -114,7 +117,9 @@ namespace eCommerce.Controllers
                 }
                 else
                 {
-                    result = "error";
+                    //result = "error";
+                    ViewBag.Message = "Error";
+                    return RedirectToAction("../Login/Login");
 
                 }
             }

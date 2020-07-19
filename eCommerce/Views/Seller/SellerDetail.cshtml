@@ -45,7 +45,7 @@
                             Name
                         </label>
                         @Html.TextBoxFor(o => o.SellerName, new { @maxlength = "100", @class = "form-control" })
-                        @Html.ValidationMessageFor(o => o.SellerName, "", new { @class = "font-red" })
+                        @Html.ValidationMessageFor(o => o.SellerName, "", new { @class = "text-danger" })
 
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         </label>
                         <div class="form-group">
                             @Html.TextAreaFor(o => o.Address, new { @maxlength = "100", @class = "form-control" })
-                            @*@Html.ValidationMessageFor(o => o.CityCode, "", new { @class = "font-red" })*@
+                            @Html.ValidationMessageFor(o => o.Address, "", new { @class = "text-danger" })
 
                         </div>
                     </div>
@@ -69,7 +69,19 @@
                         </label>
                         <div class="form-group">
                             @Html.TextBoxFor(o => o.Pincode, new { @maxlength = "6", @class = "form-control" })
-                            @Html.ValidationMessageFor(o => o.Pincode, "", new { @class = "font-red" })
+                            @Html.ValidationMessageFor(o => o.Pincode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <label>
+                            Business Name
+                        </label>
+                        <div class="form-group">
+                            @Html.TextBoxFor(o => o.BusinessName, new { @maxlength = "200", @class = "form-control" })
+                            @Html.ValidationMessageFor(o => o.BusinessName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -79,7 +91,7 @@
                         <label>
                             City
                         </label>
-                       
+
                         @{
                             var listCity = new List<SelectListItem>();
                             listCity.Add(new SelectListItem
@@ -100,12 +112,12 @@
                             });
 
                         }
-                    <div class="form-group">
-                        @*@Html.DropDownListFor(o => o.City, new SelectList(ViewBag.citylist, "Value", "Text"), "--Select State--", new { @class = "form-control", @id = "stateid" })*@
-                        @Html.DropDownListFor(o => o.City, new SelectList(listCity, "Value", "Text"), "Select City", new { @class = "form-control select2" })
-                        @Html.ValidationMessageFor(o => o.City, "", new { @class = "font-red" })
-                        @*@Html.HiddenFor(o => o.Statename)*@
-                    </div>
+                        <div class="form-group">
+                            @*@Html.DropDownListFor(o => o.City, new SelectList(ViewBag.citylist, "Value", "Text"), "--Select State--", new { @class = "form-control", @id = "stateid" })*@
+                            @Html.DropDownListFor(o => o.City, new SelectList(listCity, "Value", "Text"), "Select City", new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(o => o.City, "", new { @class = "text-danger" })
+                            @*@Html.HiddenFor(o => o.Statename)*@
+                        </div>
                     </div>
                 </div>
 
@@ -136,10 +148,10 @@
 
                         }
 
-                    <div class="form-group">
-                        @Html.DropDownListFor(o => o.State, new SelectList(listState, "Value", "Text"), "Select State ", new { @class = "form-control select2" })
-                        @Html.ValidationMessageFor(o => o.State, "", new { @class = "font-red" })
-                    </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(o => o.State, new SelectList(listState, "Value", "Text"), "Select State ", new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(o => o.State, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
 
@@ -157,13 +169,13 @@
                                 Value = "1"
                             });
 
-                            
+
                         }
 
-                    <div class="form-group">
-                        @Html.DropDownListFor(o => o.Country, new SelectList(listCountry, "Value", "Text"), "Select Country ", new { @class = "form-control select2" })
-                        @Html.ValidationMessageFor(o => o.Country, "", new { @class = "font-red" })
-                    </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(o => o.Country, new SelectList(listCountry, "Value", "Text"), "Select Country ", new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(o => o.Country, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
 
@@ -172,7 +184,7 @@
 
                         @*@if (ViewBag.addnew == true && ViewBag.PageMode != "view")*@
 
-                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("SellerDetail", "Seller")'"><i class="fa fa-save"></i> Save</button>
+                        <button type="submit" class="btn btn-purple btn-lg" id="submit" onclick="return ValidateForm(); location.href='@Url.Action("SellerDashboard", "Seller")'"><i class="fa fa-save"></i> Save</button>
 
                         <a class="btn btn-danger btn-lg ml-10" href="@Url.Action("Login", "Login")">Cancel</a>
 

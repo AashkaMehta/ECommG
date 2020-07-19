@@ -12,7 +12,8 @@
 
     </div>
     <div class="col-md-4">
-        <button class="btn btn-success">Add Product</button>
+        <button type="submit" class="btn btn-success" id="submit" onclick="location.href='@Url.Action("Seller", "Seller")'"> Add Product</button>
+        @*<button class="btn btn-success" onclick="return ValidateForm(); location.href='@Url.Action("Seller", "Seller")'">Add Product</button>*@
         <button class="btn btn-info">My Orders</button>
         <button class="btn btn-danger">Home</button>
 
